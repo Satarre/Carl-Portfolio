@@ -75,6 +75,7 @@ const hero = document.querySelector(".hero");
 const head = document.querySelector(".hero__head");
 const heroIntro = document.querySelector(".hero__intro");
 const socials = document.querySelector(".hero .socials");
+const scrollHint = document.querySelector(".hero__scroll-hint");
 const laptop = document.querySelector(".laptop");
 const laptopImg = document.querySelector(".laptop__img");
 const laptopScreen = document.querySelector(".laptop__screen");
@@ -951,6 +952,7 @@ function setupHeroZoom({ distance, fadeTargets, hideAbout = false }) {
   setAboutHidden(heroPin.isActive);
 
   tl.to(fadeTargets, { autoAlpha: 0, y: -24, duration: 0.18 }, 0)
+    .to(scrollHint, { autoAlpha: 0, duration: 0.18, immediateRender: false }, 0)
     .to(
       [laptopImg, laptopScreen],
       {
