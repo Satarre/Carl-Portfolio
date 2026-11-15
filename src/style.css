@@ -442,6 +442,15 @@ html[data-theme="dark"] .theme-toggle__icon {
   color: var(--text-soft);
 }
 
+.hero__scroll-hint > span {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.hero.is-intro-done .hero__scroll-hint > span {
+  opacity: 1;
+}
+
 .laptop {
   position: relative;
   /* Leave room for the head, padding and scroll hint on short desktop screens. */
