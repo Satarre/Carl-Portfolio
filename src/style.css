@@ -444,7 +444,8 @@ html[data-theme="dark"] .theme-toggle__icon {
 
 .laptop {
   position: relative;
-  width: min(46vw, 1100px);
+  /* Leave room for the head, padding and scroll hint on short desktop screens. */
+  width: min(46vw, 1100px, max(16rem, calc((100svh - 26rem) * 1.5)));
   aspect-ratio: 1536 / 1024;
 }
 
