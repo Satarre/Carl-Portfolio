@@ -831,10 +831,17 @@ function zoomTarget() {
 
 const mm = gsap.matchMedia();
 
-function setupHeroZoom({ distance, fadeTargets }) {
+function setupHeroZoom({ distance, fadeTargets, hideAbout = false }) {
   gsap.set(laptopImg, {
     transformOrigin: `${ZOOM.center.x * 100}% ${ZOOM.center.y * 100}%`,
   });
+
+  // Mobile toolbars shrink 100svh below the visual viewport, so the pinned hero
+  // leaves a gap that reveals the real About section behind the screen zoom.
+  const aboutPanel = hideAbout ? work.querySelector(".about") : null;
+  const setAboutHidden = (hidden) => {
+    if (aboutPanel) aboutPanel.style.visibility = hidden ? "hidden" : "";
+  };
 
   let portalBase = null;
 
@@ -914,9 +921,13 @@ function setupHeroZoom({ distance, fadeTargets }) {
       scrub: ZOOM.smoothing,
       anticipatePin: 1,
       invalidateOnRefresh: true,
-      onRefresh: () => {
+      onRefresh: (self) => {
         measurePortal();
+        setAboutHidden(self.isActive);
         if (heroPin) setHeroHidden(window.scrollY > heroPin.end);
+      },
+      onToggle: (self) => {
+        setAboutHidden(self.isActive);
       },
       onLeave: () => {
         setHeroHidden(true);
@@ -928,6 +939,7 @@ function setupHeroZoom({ distance, fadeTargets }) {
   });
 
   heroPin = tl.scrollTrigger;
+  setAboutHidden(heroPin.isActive);
 
   tl.to(fadeTargets, { autoAlpha: 0, y: -24, duration: 0.18 }, 0)
     .to(
@@ -955,6 +967,7 @@ function setupHeroZoom({ distance, fadeTargets }) {
   return () => {
     heroPin = null;
     setHeroHidden(false);
+    setAboutHidden(false);
     setLcdFade(0);
     lcdTexture.style.clipPath = "";
     lcdVignette.style.clipPath = "";
@@ -980,6 +993,7 @@ mm.add(
     setupHeroZoom({
       distance: () => ZOOM.mobileScroll * window.innerHeight,
       fadeTargets: [heroIntro, socials],
+      hideAbout: true,
     }),
 );
 
