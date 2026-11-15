@@ -1110,6 +1110,12 @@ html[data-theme="dark"] .feature__meta {
     min-height: 100svh;
   }
 
+  .hero-portal {
+    /* Covers the visual viewport even when 100svh is shorter (collapsed mobile toolbars). */
+    bottom: auto;
+    height: 100dvh;
+  }
+
   .work {
     margin-top: -100svh;
   }

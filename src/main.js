@@ -843,6 +843,13 @@ function setupHeroZoom({ distance, fadeTargets, hideAbout = false }) {
     if (aboutPanel) aboutPanel.style.visibility = hidden ? "hidden" : "";
   };
 
+  const setPinned = (active) => {
+    setAboutHidden(active);
+    // While pinned, let the zoomed laptop paint past the hero instead of being cut
+    // above the visual viewport bottom. Reset it afterwards so it cannot add scroll width.
+    hero.style.overflow = active ? "visible" : "";
+  };
+
   let portalBase = null;
 
   const measurePortal = () => {
@@ -923,11 +930,11 @@ function setupHeroZoom({ distance, fadeTargets, hideAbout = false }) {
       invalidateOnRefresh: true,
       onRefresh: (self) => {
         measurePortal();
-        setAboutHidden(self.isActive);
+        setPinned(self.isActive);
         if (heroPin) setHeroHidden(window.scrollY > heroPin.end);
       },
       onToggle: (self) => {
-        setAboutHidden(self.isActive);
+        setPinned(self.isActive);
       },
       onLeave: () => {
         setHeroHidden(true);
@@ -967,7 +974,7 @@ function setupHeroZoom({ distance, fadeTargets, hideAbout = false }) {
   return () => {
     heroPin = null;
     setHeroHidden(false);
-    setAboutHidden(false);
+    setPinned(false);
     setLcdFade(0);
     lcdTexture.style.clipPath = "";
     lcdVignette.style.clipPath = "";
