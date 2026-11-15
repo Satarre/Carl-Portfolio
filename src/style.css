@@ -426,10 +426,20 @@ html[data-theme="dark"] .theme-toggle__icon {
 .hero__stage {
   display: flex;
   flex: 1;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: clamp(0.75rem, 2vh, 1.25rem);
   min-height: 0;
   padding-top: clamp(0.5rem, 2vh, 2rem);
+}
+
+.hero__scroll-hint {
+  margin: 0;
+  font-size: clamp(0.7rem, 1vw, 0.85rem);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-soft);
 }
 
 .laptop {
