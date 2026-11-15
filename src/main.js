@@ -6,11 +6,11 @@ import darkModeToggleWavUrl from "../assets/darkmodetoggle.wav";
 
 const galleryModules = import.meta.glob(
   [
-    "../assets/self1/*.{jpg,jpeg,png,webp}",
-    "../assets/project1/*.{jpg,jpeg,png,webp}",
-    "../assets/project2/*.{jpg,jpeg,png,webp}",
-    "../assets/relevantexperience1/*.{jpg,jpeg,png,webp}",
-    "../assets/relevantexperience2/*.{jpg,jpeg,png,webp}",
+    "../assets/optimized/self1/*.webp",
+    "../assets/optimized/project1/*.webp",
+    "../assets/optimized/project2/*.webp",
+    "../assets/optimized/relevantexperience1/*.webp",
+    "../assets/optimized/relevantexperience2/*.webp",
   ],
   { eager: true, import: "default" },
 );
@@ -904,6 +904,17 @@ function setupHeroZoom({ distance, fadeTargets, hideAbout = false }) {
     lcdPlane.style.transform = `translate(${cx - halfW}px, ${cy - halfH}px) scale(${zoom})`;
   };
 
+  // Once the zoom is over, cover the whole viewport. The screen-sized plane and
+  // clip are only for the transition and can end up smaller after mobile toolbars resize.
+  const setLcdFull = () => {
+    lcdTexture.style.clipPath = "none";
+    lcdVignette.style.clipPath = "none";
+    lcdPlane.style.width = "100%";
+    lcdPlane.style.height = "100%";
+    lcdPlane.style.transform = "none";
+    setLcdFade(1);
+  };
+
   measurePortal();
   setLcdFade(0);
 
@@ -935,15 +946,20 @@ function setupHeroZoom({ distance, fadeTargets, hideAbout = false }) {
         measurePortal();
         setPinned(self.isActive);
         if (heroPin) setHeroHidden(window.scrollY > heroPin.end);
+        if (self.isActive) updatePortal(self.progress);
+        else if (window.scrollY >= self.end) setLcdFull();
       },
       onToggle: (self) => {
         setPinned(self.isActive);
       },
       onLeave: () => {
         setHeroHidden(true);
+        setLcdFull();
       },
-      onEnterBack: () => {
+      onEnterBack: (self) => {
         setHeroHidden(false);
+        measurePortal();
+        updatePortal(self.progress);
       },
     },
   });

@@ -1065,7 +1065,7 @@ html[data-theme="dark"] .lcd-texture__plane {
   left: 0;
   width: 1px;
   height: 1px;
-  background-image: url("../assets/lcdlines.png");
+  background-image: url("../assets/optimized/lcdlines.webp");
   background-repeat: no-repeat;
   background-size: 100% 100%;
   transform-origin: 0 0;
