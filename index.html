@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Carl — BS Information Technology student building IoT and AI dashboards. I turn plans into reality." />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="preconnect" href="https://fonts.cdnfonts.com" crossorigin />
+    <link rel="preload" href="https://fonts.cdnfonts.com/s/14188/HelveticaNeue-Roman.woff" as="font" type="font/woff" crossorigin />
+    <link rel="preload" href="https://fonts.cdnfonts.com/s/14188/HelveticaNeueMedium.woff" as="font" type="font/woff" crossorigin />
+    <link rel="preload" href="https://fonts.cdnfonts.com/s/14188/HelveticaNeueBold.woff" as="font" type="font/woff" crossorigin />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23ca1414'/%3E%3Ctext x='16' y='24' font-family='Helvetica,Arial' font-size='22' font-weight='bold' fill='white' text-anchor='middle'%3EC%3C/text%3E%3C/svg%3E" />
+    <title>Carl's Portfolio</title>
+    <style>
+      html {
+        scrollbar-gutter: stable;
+      }
+      html.is-locked {
+        overflow: hidden;
+      }
+      html.is-loading,
+      html.is-loading body {
+        background: #1b1b1b;
+      }
+      html.is-loading .hero {
+        opacity: 0;
+      }
+      .loader {
+        position: fixed;
+        inset: 0;
+        z-index: 100;
+        display: grid;
+        place-items: center;
+        background: #1b1b1b;
+        color: #ffffff;
+      }
+    </style>
+    <script>
+      try {
+        if (localStorage.getItem("carl-theme") === "dark") {
+          document.documentElement.dataset.theme = "dark";
+        }
+      } catch {}
+      try {
+        history.scrollRestoration = "manual";
+      } catch {}
+      window.__portfolioLoadStart = performance.now();
+      document.documentElement.classList.add("is-loading", "is-locked");
+    </script>
+    <script type="module" src="/src/main.js"></script>
+  </head>
+  <body>
+    <div class="loader" id="loader" aria-label="Loading portfolio">
+      <div class="loader__inner">
+        <div class="loader__row">
+          <span class="loader__label"><span class="magnet-inner">LOADING</span></span>
+          <span class="loader__percent" id="loader-percent" aria-live="polite"><span class="magnet-inner">0%</span></span>
+        </div>
+        <div class="loader__track" aria-hidden="true">
+          <span class="loader__bar" id="loader-bar"></span>
+        </div>
+        <button class="sound-toggle" id="sound-toggle" type="button" aria-pressed="true" aria-label="Mute sound" data-magnetic>
+          <span class="magnetic__inner">SOUND ON</span>
+        </button>
+      </div>
+    </div>
+
+    <script>
+      try {
+        if (localStorage.getItem("carl-sound") === "off") {
+          const button = document.querySelector(".sound-toggle");
+          if (button) {
+            button.setAttribute("aria-pressed", "false");
+            button.setAttribute("aria-label", "Unmute sound");
+            const label = button.querySelector(".magnetic__inner");
+            if (label) label.textContent = "SOUND OFF";
+          }
+        }
+      } catch {}
+    </script>
+
+    <main inert>
+      <section class="hero" id="hero" aria-labelledby="hero-title">
+        <div class="hero__head">
+          <div class="hero__intro">
+            <h1 class="hero__title" id="hero-title">
+              <span class="sr-only">HI, I'M CARL.</span>
+              <span class="hero__static" aria-hidden="true">HI, I'M <span class="is-red">CARL.</span></span>
+              <span class="hero__typed" aria-hidden="true"></span>
+            </h1>
+            <p class="hero__tagline">
+              <span class="sr-only">I TURN PLANS INTO REALITY.</span>
+              <span class="hero__static" aria-hidden="true">I TURN PLANS INTO <span class="is-red">REALITY.</span></span>
+              <span class="hero__typed" aria-hidden="true"></span>
+            </p>
+          </div>
+
+          <ul class="socials">
+            <!-- TODO: replace with your profile URLs -->
+            <li>
+              <a href="https://github.com/satarre" target="_blank" rel="noreferrer" aria-label="GitHub profile">
+                <span class="socials__icon socials__icon--github" aria-hidden="true"></span>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.linkedin.com/in/andre-carl-espinosa-21620131b/" target="_blank" rel="noreferrer" aria-label="LinkedIn profile">
+                <span class="socials__icon socials__icon--linkedin" aria-hidden="true"></span>
+              </a>
+            </li>
+            <li class="socials__theme">
+              <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode">
+                <span class="theme-toggle__icon" aria-hidden="true"></span>
+              </button>
+            </li>
+          </ul>
+        </div>
+
+        <div class="hero__stage">
+          <div class="laptop">
+            <div class="laptop__screen" aria-hidden="true"></div>
+            <img
+              class="laptop__img"
+              src="./assets/laptop.png"
+              alt="Open laptop with a blank display"
+              width="1536"
+              height="1024"
+              fetchpriority="high"
+            />
+          </div>
+        </div>
+
+        <div class="hero-portal" aria-hidden="true">
+          <div class="hero-portal__stage about"></div>
+        </div>
+      </section>
+
+      <section class="work" aria-label="Projects and experience">
+        <div class="work__track">
+          <article class="panel about" id="hello-world" aria-labelledby="about-title">
+            <div class="section-inner">
+              <p class="eyebrow">[INTRODUCTION]</p>
+
+              <div class="about__grid">
+                <div class="magnetic-thumb" data-magnetic>
+                  <figure class="about__media magnetic__inner">
+                    <button class="carousel" type="button" data-gallery="self1" aria-label="Next self photo">
+                      <img
+                        class="carousel__image is-active"
+                        src="./assets/self1/1.jpg"
+                        alt="Portrait of Carl in a suit"
+                        width="941"
+                        height="826"
+                      />
+                      <img class="carousel__image" alt="" aria-hidden="true" width="941" height="826" />
+                    </button>
+                  </figure>
+                </div>
+
+                <div class="about__content">
+                  <h2 class="about__title" id="about-title">HELLO WORLD</h2>
+
+                  <p>
+                    My name is Carl Espinosa, a 22-year-old BS Information Technology Student with
+                    specialization in Aviation Information Technology from the National Aviation Academy
+                    of the Philippines, I have experience in building and deploying dashboard systems with 
+                    Internet of Things (IoT) and Artificial Intelligence (AI).
+                  </p>
+                  <p>
+                    I work as a freelance computer education tutor, working with kids to enhance
+                    their technical computer skills such as typing speed, programming, and web
+                    design.
+                  </p>
+                  <p>
+                    I am constantly learning with a goal to be an AI Engineer who creates technology
+                    that truly makes an impact in the world.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="panel feature" id="vehicle-request" aria-labelledby="vehicle-title">
+            <div class="section-inner">
+              <p class="eyebrow">[PROJECTS]</p>
+
+              <div class="feature__grid">
+                <div class="magnetic-thumb" data-magnetic>
+                  <figure class="feature__media magnetic__inner">
+                    <button class="carousel" type="button" data-gallery="project1" aria-label="Next project photo">
+                      <img
+                        class="carousel__image is-active"
+                        src="./assets/project1/1.png"
+                        alt="GSD Digital Trip Ticket System dashboard showing a tracked route on a map"
+                        width="1899"
+                        height="908"
+                      />
+                      <img class="carousel__image" alt="" aria-hidden="true" width="1899" height="908" />
+                    </button>
+                  </figure>
+                </div>
+
+                <div class="feature__content">
+                  <h2 class="feature__title" id="vehicle-title">
+                    Web-based Vehicle Request System with GPS Tracking and Chatbot Assistance
+                  </h2>
+                  <p class="feature__meta">// Capstone Project (Sole Member)</p>
+                  <p class="feature__body">
+                    Developed a centralized vehicle management system supporting six user roles by
+                    implementing secure authentication, approval workflows, GPS tracking,
+                    operational reporting, and rule-based chatbot assistance.
+                  </p>
+                  <p class="feature__stack">
+                    Tech Stack: PHP, MariaDB, JavaScript, Tailwind CSS, Google Maps Platform, ESP32,
+                    GPS (u-blox NEO-8M), 4G (A7679C).
+                  </p>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="panel feature" id="jetlog" aria-labelledby="jetlog-title">
+            <div class="section-inner">
+              <p class="eyebrow">[PROJECTS]</p>
+
+              <div class="feature__grid">
+                <div class="magnetic-thumb" data-magnetic>
+                  <figure class="feature__media magnetic__inner">
+                    <button class="carousel" type="button" data-gallery="project2" aria-label="Next project photo">
+                      <img
+                        class="carousel__image is-active"
+                        src="./assets/project2/1.png"
+                        alt="JetLog aircraft maintenance dashboard with fleet and work-order summaries"
+                        width="1465"
+                        height="811"
+                      />
+                      <img class="carousel__image" alt="" aria-hidden="true" width="1465" height="811" />
+                    </button>
+                  </figure>
+                </div>
+
+                <div class="feature__content">
+                  <h2 class="feature__title" id="jetlog-title">
+                    JetLog - AI-Powered Aircraft Maintenance Management System
+                  </h2>
+                  <p class="feature__meta">// Final Project</p>
+                  <p class="feature__body">
+                    Integrating AI-powered summaries, QR-based access, maintenance reminders, and
+                    analytics to improve record retrieval and maintenance visibility.
+                  </p>
+                  <p class="feature__stack">
+                    Tech Stack: PHP, MariaDB, JavaScript, Google Gemini API
+                  </p>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="feature" id="ssc" aria-labelledby="ssc-title">
+        <div class="section-inner">
+          <p class="eyebrow">[RELEVANT EXPERIENCE]</p>
+
+          <div class="feature__grid">
+            <div class="magnetic-thumb" data-magnetic>
+              <figure class="feature__media feature__media--photo magnetic__inner">
+                <button class="carousel" type="button" data-gallery="relevantexperience1" aria-label="Next experience photo">
+                  <img
+                    class="carousel__image is-active"
+                    src="./assets/relevantexperience1/1.jpeg"
+                    alt="Carl speaking at a podium during a Supreme Student Council event"
+                    width="1048"
+                    height="698"
+                    loading="lazy"
+                  />
+                  <img class="carousel__image" alt="" aria-hidden="true" width="1048" height="698" />
+                </button>
+              </figure>
+            </div>
+
+            <div class="feature__content">
+              <h2 class="feature__title" id="ssc-title">
+                PhilSCA VAB Supreme Student Council - Senator for Multimedia Committee
+              </h2>
+              <p class="feature__meta">// A.Y. 2024 - 2025</p>
+              <p class="feature__body">
+                Led the Multimedia Committee by delegating tasks, coordinating projects with
+                student leaders, and managing digital content, event branding, and documentation.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="feature" id="elite" aria-labelledby="elite-title">
+        <div class="section-inner">
+          <p class="eyebrow">[RELEVANT EXPERIENCE]</p>
+
+          <div class="feature__grid">
+            <div class="magnetic-thumb" data-magnetic>
+              <figure class="feature__media feature__media--photo magnetic__inner">
+                <button class="carousel" type="button" data-gallery="relevantexperience2" aria-label="Next experience photo">
+                  <img
+                    class="carousel__image is-active"
+                    src="./assets/relevantexperience2/1.png"
+                    alt="Elite Technologist Society members posing in front of an aircraft"
+                    width="1536"
+                    height="1024"
+                    loading="lazy"
+                  />
+                  <img class="carousel__image" alt="" aria-hidden="true" width="1536" height="1024" />
+                </button>
+              </figure>
+            </div>
+
+            <div class="feature__content">
+              <h2 class="feature__title" id="elite-title">
+                Elite Technologist Society - Public Information Officer
+              </h2>
+              <p class="feature__meta">// A.Y. 2025 - 2026</p>
+              <p class="feature__body">
+                Led the Publications Committee, coordinated multimedia projects, managed
+                organizational social media, and contributed to a 33% increase in Facebook
+                followers during tenure.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="skills" id="skills" aria-labelledby="skills-title">
+        <div class="section-inner">
+          <div class="skills__head">
+            <h2 class="eyebrow eyebrow--light" id="skills-title">[TECHNICAL SKILLS]</h2>
+            <p class="skills__intro">The languages, tools, and APIs I work with.</p>
+          </div>
+
+          <ol class="skills__list magnetic__inner">
+            <li class="skill-row">
+              <div class="skill-row__inner">
+                <span class="skill-row__index" aria-hidden="true">01</span>
+                <h3 class="skill-row__title">PROGRAMMING LANGUAGES</h3>
+                <p class="skill-row__tools">Python, PHP, JavaScript, TypeScript, Java, C#</p>
+              </div>
+            </li>
+            <li class="skill-row">
+              <div class="skill-row__inner">
+                <span class="skill-row__index" aria-hidden="true">02</span>
+                <h3 class="skill-row__title">WEB TECHNOLOGIES</h3>
+                <p class="skill-row__tools">HTML5, CSS3, Bootstrap, Tailwind CSS, Vite</p>
+              </div>
+            </li>
+            <li class="skill-row">
+              <div class="skill-row__inner">
+                <span class="skill-row__index" aria-hidden="true">03</span>
+                <h3 class="skill-row__title">BACKEND AND DATABASES</h3>
+                <p class="skill-row__tools">MySQL, MariaDB, SQLite</p>
+              </div>
+            </li>
+            <li class="skill-row">
+              <div class="skill-row__inner">
+                <span class="skill-row__index" aria-hidden="true">04</span>
+                <h3 class="skill-row__title">APIS AND AI TOOLS</h3>
+                <p class="skill-row__tools">Google Maps API, Claude API, OpenCode</p>
+              </div>
+            </li>
+            <li class="skill-row">
+              <div class="skill-row__inner">
+                <span class="skill-row__index" aria-hidden="true">05</span>
+                <h3 class="skill-row__title">DESIGN TOOLS</h3>
+                <p class="skill-row__tools">Figma, Draw.io, Adobe Photoshop, Canva</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="contact" id="contact" aria-labelledby="contact-title">
+        <div class="section-inner contact__inner">
+          <div class="contact__body">
+            <div class="contact__sheet">
+              <div class="contact__intro">
+                <h2 class="contact__title" id="contact-title">[CONTACT ME]</h2>
+                <p class="contact__pitch">
+                  Have a project, role, or collaboration in mind? Let's build something.
+                </p>
+
+                <div class="contact__actions">
+                  <!-- TODO: replace with your profile URLs -->
+                  <a
+                    class="contact__button"
+                    href="https://github.com/satarre"
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label="GitHub profile (opens in a new tab)"
+                  >
+                    <span class="contact__button-inner magnetic__inner">
+                      <span class="contact__button-icon contact__button-icon--github" aria-hidden="true"></span>
+                      <span class="contact__button-label">GITHUB</span>
+                      <span class="contact__button-arrow" aria-hidden="true">↗</span>
+                    </span>
+                  </a>
+                  <a
+                    class="contact__button"
+                    href="https://www.linkedin.com/in/andre-carl-espinosa-21620131b/"
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label="LinkedIn profile (opens in a new tab)"
+                  >
+                    <span class="contact__button-inner magnetic__inner">
+                      <span class="contact__button-icon contact__button-icon--linkedin" aria-hidden="true"></span>
+                      <span class="contact__button-label">LINKEDIN</span>
+                      <span class="contact__button-arrow" aria-hidden="true">↗</span>
+                    </span>
+                  </a>
+                </div>
+              </div>
+
+              <div class="contact__direct magnetic__inner">
+                <!-- TODO: replace the copy values with real email and Instagram details. -->
+                <button class="contact__row" type="button" data-copy="andrltespinosa@gmail.com">
+                  <span class="contact__row-label">EMAIL</span>
+                  <span class="contact__row-value">andrltespinosa@gmail.com</span>
+                  <span class="contact__tag" aria-live="polite">COPY</span>
+                </button>
+                <button class="contact__row" type="button" data-copy="@carl.espi.18">
+                  <span class="contact__row-label">INSTAGRAM</span>
+                  <span class="contact__row-value">carl.espi.18</span>
+                  <span class="contact__tag" aria-live="polite">COPY</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact__footer">
+            <span>© 2026 Carl</span>
+            <span>METRO MANILA, PHILIPPINES</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Fixed LCD layers: clipped to the laptop screen during the zoom, then full-viewport. -->
+    <div class="lcd-texture" aria-hidden="true">
+      <div class="lcd-texture__plane"></div>
+    </div>
+    <div class="lcd-vignette" aria-hidden="true"></div>
+  </body>
+</html>
