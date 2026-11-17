@@ -440,6 +440,7 @@ updateSoundControl();
    Image carousels
    ------------------------------------------------------------------ */
 const CAROUSEL_INTERVAL = 4500;
+const CAROUSEL_FADE = 520; // matches the 0.5s opacity transition in style.css
 
 function playCarouselClickSound() {
   if (!soundOn) return;
@@ -463,7 +464,9 @@ document.querySelectorAll(".carousel[data-gallery]").forEach((button) => {
 
   const baseAlt = layers[0].alt || "Portfolio photo";
   let timer = null;
+  let fadeTimer = null;
   let visible = false;
+  let fading = false;
   let active = 0;
   let front = 1;
 
@@ -494,6 +497,12 @@ document.querySelectorAll(".carousel[data-gallery]").forEach((button) => {
       if (isActive) layer.removeAttribute("aria-hidden");
       else layer.setAttribute("aria-hidden", "true");
     });
+
+    fading = true;
+    clearTimeout(fadeTimer);
+    fadeTimer = setTimeout(() => {
+      fading = false;
+    }, CAROUSEL_FADE);
   };
 
   const canAuto = () => visible && !document.hidden && !reducedMotion;
@@ -510,6 +519,11 @@ document.querySelectorAll(".carousel[data-gallery]").forEach((button) => {
 
   const next = (manual) => {
     clearTimeout(timer);
+    // A tap that lands mid-fade (or a duplicated tap) must not advance a second photo.
+    if (fading) {
+      schedule();
+      return;
+    }
     active = (active + 1) % slides.length;
     apply(active);
     if (manual) playCarouselClickSound();
