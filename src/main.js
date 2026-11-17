@@ -1156,6 +1156,10 @@ function addSectionGroup(section) {
     addGroupItem(group, element, element.querySelector(".contact__button-inner"), "button");
   });
 
+  section.querySelectorAll(".feature__link").forEach((element) => {
+    addGroupItem(group, element, element, "button");
+  });
+
   section.querySelectorAll(".contact__direct").forEach((element) => {
     addGroupItem(group, element, element, "card");
   });
