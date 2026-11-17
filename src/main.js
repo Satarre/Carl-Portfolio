@@ -28,6 +28,8 @@ Object.values(galleryImages).forEach((slides) => {
 });
 
 gsap.registerPlugin(ScrollTrigger);
+// Mobile toolbars change innerHeight while scrolling; re-measuring then shifts pinned content.
+ScrollTrigger.config({ ignoreMobileResize: true });
 
 /* ------------------------------------------------------------------
    Intro / interaction settings
@@ -1352,12 +1354,23 @@ window.addEventListener(
   { once: true },
 );
 
+let resizeFrame = 0;
+let resizeWidth = window.innerWidth;
+
 window.addEventListener("resize", () => {
-  ScrollTrigger.refresh();
-  positionMobileIntro();
-  if (heroPin) {
-    hero.style.visibility = window.scrollY > heroPin.end ? "hidden" : "";
-  }
+  const widthChanged = window.innerWidth !== resizeWidth;
+  resizeWidth = window.innerWidth;
+  // Mobile toolbars only change the height while scrolling; re-measuring then makes the page jump.
+  if (!widthChanged && window.matchMedia("(max-width: 899px)").matches) return;
+
+  cancelAnimationFrame(resizeFrame);
+  resizeFrame = requestAnimationFrame(() => {
+    ScrollTrigger.refresh();
+    positionMobileIntro();
+    if (heroPin) {
+      hero.style.visibility = window.scrollY > heroPin.end ? "hidden" : "";
+    }
+  });
 });
 
 document.fonts?.ready.then(positionMobileIntro);

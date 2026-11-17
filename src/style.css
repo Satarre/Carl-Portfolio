@@ -127,6 +127,8 @@ body {
   font-family: var(--font);
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+  /* clip avoids the iOS scroll container that overflow-x: hidden creates. */
+  overflow-x: clip;
 }
 
 img {
