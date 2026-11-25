@@ -699,8 +699,8 @@ const titleSegments = [
   { text: "CARL.", red: true },
 ];
 const taglineSegments = [
-  { text: "I TURN PLANS INTO ", red: false },
-  { text: "REALITY.", red: true },
+  { text: "IM TALKING ABOUT, red: false },
+  { text: "FAYE.", red: true },
 ];
 
 function buildSegments(container, segments) {
