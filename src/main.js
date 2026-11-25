@@ -699,7 +699,7 @@ const titleSegments = [
   { text: "CARL.", red: true },
 ];
 const taglineSegments = [
-  { text: "IM TALKING ABOUT, red: false },
+  { text: "IM TALKING ABOUT , red: false },
   { text: "FAYE.", red: true },
 ];
 
